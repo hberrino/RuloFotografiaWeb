@@ -12,6 +12,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (href) => {
+    setIsOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -23,7 +31,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <a
           href="#hero"
-          className="text-white text-2xl font-bold tracking-wider hover:text-blue-400 transition-colors duration-300"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick("#hero");
+          }}
+          className="text-white text-2xl font-bold tracking-wider hover:text-blue-400 transition-all duration-300 transform hover:scale-105"
         >
           PH Rulo
         </a>
@@ -32,16 +44,20 @@ export default function Navbar() {
             <li key={link.href} className="relative group">
               <a
                 href={link.href}
-                className="hover:text-blue-400 transition-colors duration-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
+                className="hover:text-blue-400 transition-all duration-300 transform hover:translate-y-[-2px] relative"
               >
                 {link.label}
               </a>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
           ))}
         </ul>
         <button
-          className="md:hidden text-white text-3xl p-2 rounded-lg hover:bg-gray-800 transition-colors duration-300"
+          className="md:hidden text-white text-3xl p-2 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 hover:rotate-90"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <FiX /> : <FiMenu />}
@@ -57,8 +73,11 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="hover:text-blue-400 transition-colors duration-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
+                className="hover:text-blue-400 transition-all duration-300 transform hover:scale-110 hover:translate-y-[-2px] inline-block"
               >
                 {link.label}
               </a>

@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
   id="hero"
-  className="pt-24 md:pt-0 relative min-h-screen flex flex-col justify-center px-6 bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100"
+  className="pt-24 md:pt-0 relative min-h-screen flex flex-col justify-center px-6"
 >
   <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
     
